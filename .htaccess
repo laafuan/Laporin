@@ -1,0 +1,11 @@
+# Untuk hosting yang folder utamanya (public_html) tidak bisa diarahkan ke folder "public":
+# semua permintaan dialihkan ke dalam folder public, sehingga file lain (.env, database) tidak bisa dibuka.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Cadangan bila mod_rewrite tidak aktif: tolak file rahasia.
+<FilesMatch "(^\.|\.(sqlite|log|lock|json|md|xml)$|^artisan$)">
+    Require all denied
+</FilesMatch>
